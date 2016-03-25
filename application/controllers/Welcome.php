@@ -27,6 +27,9 @@ class Welcome extends MY_Controller {
 	        'version' => (ENVIRONMENT === 'development') ? CI_VERSION : '',
 	    ));
 
-		Console::log($this->cache->redis->cache_info());
+	    if ($this->cache->redis->is_supported()) {
+	    	Console::log($this->cache->redis->cache_info());
+	    }
+		
 	}
 }
