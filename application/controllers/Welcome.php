@@ -18,6 +18,7 @@ class Welcome extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	
 	public function index()
 	{
 	    $this->twig->render('welcome_message', array(
@@ -27,9 +28,11 @@ class Welcome extends MY_Controller {
 	        'version' => (ENVIRONMENT === 'development') ? CI_VERSION : '',
 	    ));
 
-	    if ($this->cache->redis->is_supported()) {
-	    	Console::log($this->cache->redis->cache_info());
-	    }
+	    // Redis Cache Driver If Enabled
+	    // if ($this->cache->redis->is_supported()) {
+	    // 	Console::log($this->cache->redis->cache_info());
+	    // }
 		
 	}
+
 }
