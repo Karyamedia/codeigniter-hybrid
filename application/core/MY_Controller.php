@@ -17,5 +17,16 @@ class MY_Controller extends CI_Controller
 		}
 
 		log_message('debug', 'MY_Controller : MY_Controller class loaded');
+
+	}
+
+	function request_time()
+	{
+		return number_format(microtime(true) - $_SERVER['REQUEST_TIME_FLOAT'], 3);
+	}
+
+	function version()
+	{
+		return (ENVIRONMENT === 'development') ? CI_VERSION : '';
 	}
 }

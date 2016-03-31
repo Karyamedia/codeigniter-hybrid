@@ -2,7 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 // use \Illuminate\Database\Eloquent\Model as Eloquent;
-// use \Illuminate\Database\Capsule\Manager as Capsule;
+use \Illuminate\Database\Capsule\Manager as Capsule;
 
 // class tablename(s) extends Illuminate\Database\Eloquent\Model {}
 
@@ -23,36 +23,20 @@ class Welcome extends MY_Controller {
 	 * map to /index.php/welcome/<method_name>
 	 * @see https://codeigniter.com/user_guide/general/urls.html
 	 */
+	public function __construct()
+	{
+		parent::__construct();
+		$this->load->model('Eloquent/Assets/Action', 'action');
+	}
+
 	public function index()
 	{
 	    $this->twig->render('welcome_message', array(
 
 	        'title' => "Hello Mentoring",
-	        'elapsed_time' => $this->benchmark->elapsed_time(),
-	        'version' => (ENVIRONMENT === 'development') ? CI_VERSION : '',
-	    ));
-
-	    // https://laravel.com/docs/5.2/queries or https://laravel.com/docs/4.2/eloquent
-
-	    // eloquent ORM
-	    //$ss = Attendance::select('nama', 'email')->where('att_d1', '=', 1)->get();
-
-	    // suggest user capsule
-	    //$users = Capsule::table('attendance')->where('att_d1', '=', 1)->get();
-
-	    //echo $att->nama;
-	    //Console::log($att);
-
-	    //foreach ($users as $user)
-		//{
-		//    echo $user->email;
-		//}
-
-	    // Redis Cache Driver If Enabled
-	    // if ($this->cache->redis->is_supported()) {
-	    // 	Console::log($this->cache->redis->cache_info());
-	    // }
-		
+	        'elapsed_time' => $this->request_time(),
+	        'version' => $this->version(),
+	    ));	
 	}
 
 }
